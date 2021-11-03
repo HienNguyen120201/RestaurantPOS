@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using RestaurantPOS.Models;
+using RestaurantPOS.Services;
+using System.Security.Claims;
+using RestaurantManagement.Models;
 
 namespace RestaurantPOS.Controllers
 {
@@ -26,6 +29,22 @@ namespace RestaurantPOS.Controllers
         public IActionResult Privacy()
         {
             return View();
+        }
+
+        [HttpGet("/Payment")]
+        public async Task<IActionResult> Payment()
+        {
+            if (!User.Identity.IsAuthenticated)
+                return RedirectToAction("Login", "Home");
+            var payment = await _customerService.GetBillToPayAsync(User);
+            return View(payment);
+        }
+
+        [HttpPost("/Payment")]
+        public async Task<IActionResult> Payment(PaymentViewModel billPaymentVM)
+        {
+            await _customerService.UpdatePaymentMethodAsync(User, billPaymentVM);
+            return RedirectToAction("MenuFood", "Menu");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

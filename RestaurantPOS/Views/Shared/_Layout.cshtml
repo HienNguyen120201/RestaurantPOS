@@ -30,6 +30,30 @@
             </div>
         </nav>
     </header>
+    <!-- /HEADER -->
+    <!-- NAVIGATION -->
+    <nav id="navigation">
+        <!-- container -->
+        <div class="container">
+            <!-- responsive-nav -->
+            <div id="responsive-nav">
+                <!-- NAV -->
+                <ul class="main-nav nav navbar-nav">
+                    <li><a href=@Url.Action("Index","Home")>Home</a></li>
+                    <li><a href="@Url.Action("MenuFood","Menu")">Menu</a></li>
+                    <li><a href="#">Đặt bàn</a></li>
+                    <li><a href="@Url.Action("Payment", "Home")">Thanh toán</a></li>
+                    <li><a href="@Url.Action("TableOrderedHistory","Home")">Lịch sử đặt bàn</a></li>
+                    <li><a href="@Url.Action("PaymentHistory","Home")">Lịch sử thanh toán</a></li>
+                </ul>
+                <!-- /NAV -->
+            </div>
+            <!-- /responsive-nav -->
+        </div>
+        <!-- /container -->
+    </nav>
+    <!-- /NAVIGATION -->
+    <!--BODY-->
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
